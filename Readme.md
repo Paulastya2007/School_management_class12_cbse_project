@@ -16,8 +16,10 @@ To start this project in this remote session
     docker exec -it <container_id> mysql -u root -pmy-secret-pw
     
     ```
-    3.```
+    3.If the database and tables are not already created:
+    ```
         SOURCE /SQL/database_setup.sql
+        SOURCE /SQL/Dummy_Values.sql
         ```
 
 
@@ -47,13 +49,3 @@ default here is: `my-secret-pw`
         `db = mysql.connector.connect(user='root', password=<Password>, host='localhost',database='mysql')`
 
 
-
-
-
-docker exec -it <container_id> mysql -u root -p
-
-
-
-79dc3a8c2e64
-
-docker exec -it 79dc3a8c2e64 mysql -u root -p
