@@ -24,4 +24,4 @@ To start the existing env
 
 
 Install mysql connector 
-        pip install mysql-connector-python
+        `pip install mysql-connector-python`
