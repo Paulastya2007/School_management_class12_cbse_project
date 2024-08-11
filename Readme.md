@@ -23,3 +23,5 @@ To start the existing env
         `myenv\Scripts\activate`
 
 
+Install mysql connector 
+        pip install mysql-connector-python
