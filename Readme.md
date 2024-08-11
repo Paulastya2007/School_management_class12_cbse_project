@@ -13,7 +13,9 @@ Root Password: `my-secret-pw`
 
 Run: `python3 -m venv myenv`
 
+
 To start the existing env
+    
     Linux 
         `source myenv/bin/activate`
     
