@@ -5,3 +5,7 @@ To start the container with SQL installed run this command
 
 Service name: `mysql`
 Root Password: `my-secret-pw`
+
+
+
+*For use in local machine use ur password*
