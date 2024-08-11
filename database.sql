@@ -10,6 +10,7 @@ CREATE TABLE student (
     cty VARCHAR(20)
 );
 
+#Create emp table
 CREATE TABLE emp (
     empno INT(11) PRIMARY KEY,
     ename VARCHAR(20),
@@ -17,12 +18,16 @@ CREATE TABLE emp (
     hiredate DATE
 );
 
+
+#Create fee table
 CREATE TABLE fee (
     admno INT(11),
     fee INT(11),
     month VARCHAR(15)
 );
 
+
+#Create exam table
 CREATE TABLE exam (
     sname VARCHAR(20),
     admno INT(11),
