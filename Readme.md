@@ -6,6 +6,19 @@ To start the container with SQL installed run this command
 Service name: `mysql`
 Root Password: `my-secret-pw`
 
+To start this project in this remote session
+    1. Get the container id by
+    ```
+        docker ps
+    ```
+    2. Go to the SQL directory and then run
+    ```
+    docker exec -it <container_id> mysql -u root -pmy-secret-pw
+    
+    ```
+    3.```
+        SOURCE /SQL/database_setup.sql
+        ```
 
 
 *For use in local machine use ur password*
@@ -32,3 +45,15 @@ most of the things should work out-of-the-box
 default here is: `my-secret-pw`
 
         `db = mysql.connector.connect(user='root', password=<Password>, host='localhost',database='mysql')`
+
+
+
+
+
+docker exec -it <container_id> mysql -u root -p
+
+
+
+79dc3a8c2e64
+
+docker exec -it 79dc3a8c2e64 mysql -u root -p
