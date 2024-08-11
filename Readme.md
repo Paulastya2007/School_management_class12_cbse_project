@@ -25,3 +25,10 @@ To start the existing env
 
 Install mysql connector 
         `pip install mysql-connector-python`
+
+
+_Modify this line according to ur database and password and username_
+most of the things should work out-of-the-box
+default here is: `my-secret-pw`
+
+        `db = mysql.connector.connect(user='root', password=<Password>, host='localhost',database='mysql')`

@@ -5,7 +5,10 @@ import mysql.connector
 #import pandas as pd
 #from pandas import DataFrame
 def selection():
-db = mysql.connector.connect(user='root', password='tiger', host='localhost',database='mysql')
+
+
+db = mysql.connector.connect(user='root', password='my-secret-pw', host='localhost',database='mysql')
+
 cursor = db.cursor()
 print('-----------------------------------\nWELCOME TO SCHOOL MANAGEMENT SYSTEM\n-----------------------------------')
 print("1.STUDENT MANAGEMENT")
