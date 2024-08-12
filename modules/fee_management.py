@@ -6,56 +6,56 @@ def fee_management(db):
         print('\n---------------------------------')
         print('WELCOME TO FEE MANAGEMENT SYSTEM')
         print('---------------------------------')
-        print('1. RECORD PAYMENT')
-        print('2. VIEW ALL PAYMENTS')
-        print('3. VIEW PAYMENT DETAILS BY STUDENT ID')
+        print('1. NEW FEE RECORD')
+        print('2. VIEW ALL FEE DETAILS')
+        print('3. VIEW FEE DETAILS BY ADMISSION NUMBER')
         print('4. RETURN TO MAIN MENU')
 
         choice = input("\nEnter your choice (1-4): ")
 
         if choice == '1':
-            record_payment(db)
+            insert_fee(db)
         elif choice == '2':
-            display_all_payments(db)
+            display_all_fees(db)
         elif choice == '3':
-            display_payment_by_student_id(db)
+            display_fee_by_admno(db)
         elif choice == '4':
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
-def record_payment(db):
-    """Record a new payment into the database."""
-    student_id = int(input("Enter Student ID: "))
-    amount = float(input("Enter Payment Amount: "))
-    payment_date = input("Enter Payment Date (yyyy-mm-dd): ")
+def insert_fee(db):
+    """Insert a new fee record into the database."""
+    admno = int(input("Enter Admission Number: "))
+    fee_amount = float(input("Enter Fee Amount: "))
+    month = input("Enter Month: ")
 
     try:
         cursor = db.cursor()
-        sql = "INSERT INTO payments (student_id, amount, payment_date) VALUES (%s, %s, %s)"
-        cursor.execute(sql, (student_id, amount, payment_date))
+        sql = "INSERT INTO fee (admno, fee, month) VALUES (%s, %s, %s)"
+        cursor.execute(sql, (admno, fee_amount, month))
         db.commit()
-        print("Payment recorded successfully!")
+        print("New fee record added successfully!")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         db.rollback()
     finally:
         cursor.close()
 
-def display_all_payments(db):
-    """Display all payments in the database."""
+def display_all_fees(db):
+    """Display all fee records in the database."""
     try:
         cursor = db.cursor()
-        sql = "SELECT * FROM payments"
+        sql = "SELECT * FROM fee"
         cursor.execute(sql)
         results = cursor.fetchall()
         
         if results:
-            print("\nAll Payment Details:")
+            print("\nAll Fee Details:")
             for row in results:
-                print(f"Payment ID: {row[0]}, Student ID: {row[1]}, Amount: {row[2]}, Payment Date: {row[3]}")
+                print(f"Admission No: {row[0]}, Fee: {row[1]}, Month: {row[2]}")
         else:
-            print("No payments found.")
+            print("No fee records found.")
         
         input("\nPress any key to continue...")  # Pause after displaying the details
     except mysql.connector.Error as err:
@@ -63,22 +63,21 @@ def display_all_payments(db):
     finally:
         cursor.close()
 
-def display_payment_by_student_id(db):
-    """Display details of payments by Student ID."""
-    student_id = int(input("Enter Student ID: "))
+def display_fee_by_admno(db):
+    """Display fee details by admission number."""
+    admno = int(input("Enter Admission Number: "))
 
     try:
         cursor = db.cursor()
-        sql = "SELECT * FROM payments WHERE student_id = %s"
-        cursor.execute(sql, (student_id,))
-        results = cursor.fetchall()
+        sql = "SELECT * FROM fee WHERE admno = %s"
+        cursor.execute(sql, (admno,))
+        result = cursor.fetchone()
         
-        if results:
-            print(f"\nPayment Details for Student ID {student_id}:")
-            for row in results:
-                print(f"Payment ID: {row[0]}, Amount: {row[2]}, Payment Date: {row[3]}")
+        if result:
+            print(f"\nFee Details for Admission No {admno}:")
+            print(f"Admission No: {result[0]}, Fee: {result[1]}, Month: {result[2]}")
         else:
-            print("No payments found for this student.")
+            print("No fee record found for this admission number.")
         
         input("\nPress any key to continue...")  # Pause after displaying the details
     except mysql.connector.Error as err:
