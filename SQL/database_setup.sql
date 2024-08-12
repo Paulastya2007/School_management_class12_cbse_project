@@ -8,11 +8,9 @@ CREATE TABLE student (
     sname VARCHAR(30) NOT NULL,
     admno INT PRIMARY KEY,
     dob DATE,
-    cls CHAR(2),
+    cls CHAR(5),
     cty VARCHAR(20)
 );
-
-
 
 CREATE TABLE emp (
     empno INT PRIMARY KEY,
