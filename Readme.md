@@ -1,46 +1,79 @@
-*This Project is made in a container environment*
+### Project Setup
 
-To start the container with SQL installed run this command
-`docker-compose up -d`
+#### Container Environment
+**Prerequisites:** Docker Compose
 
-Service name: `mysql`
-Root Password: `my-secret-pw`
+1. **Start the container:**
+   ```bash
+   docker-compose up -d
+   ```
+   This will start a container with the MySQL database.
 
-To start this project in this remote session
-    1. Get the container id by
-    ```
-        docker ps
-    ```
-    2. Go to the SQL directory and then run
-    ```
-    docker exec -it <container_id> mysql -u root -pmy-secret-pw```  
-    3. If the database and tables are not already created:
-        
-        SOURCE /SQL/database_setup.sql
-        SOURCE /SQL/Dummy_Values.sql
-*For use in local machine use ur password*
-*Make a Python Virtual Environment for this project*
+2. **Access the MySQL container:**
+   * Find the container ID:
+     ```bash
+     docker ps
+     ```
+   * Access the MySQL console:
+     ```bash
+     docker exec -it <container_id> mysql -u root -pmy-secret-pw
+     ```
+   * Create database and tables (if not already created):
+     ```sql
+     SOURCE /SQL/database_setup.sql
+     SOURCE /SQL/Dummy_Values.sql
+     ```
 
-Run: `python3 -m venv myenv`
+**Note:** Replace `my-secret-pw` with your actual MySQL root password.
 
-
-To start the existing env
-    
-    Linux 
-        `source myenv/bin/activate`
-    
-    Windows
-        `myenv\Scripts\activate`
+#### Local Machine (Windows or Linux)
 
 
-Install mysql connector 
-        `pip install mysql-connector-python`
 
+**Prerequisites:** Python 3, pip
 
-_Modify this line according to ur database and password and username_
-most of the things should work out-of-the-box
-default here is: `my-secret-pw`
+1. **Create a virtual environment:**
+   ```bash
+   python3 -m venv myenv
+   ```
+   ```bash
+   source myenv/bin/activate  # Linux
+   ```
+   ```bash
+   myenv\Scripts\activate  # Windows
+   ```
+2. **Install required packages:**
+   ```bash
+   pip install mysql-connector-python pandas
+   ```
 
-        `db = mysql.connector.connect(user='root', password=<Password>, host='localhost',database='mysql')`
+### Database Connection
+**Replace placeholders with your actual credentials:**
+```python
+import mysql.connector
 
+db = mysql.connector.connect(
+    user='root',
+    password='your_password',
+    host='localhost',  # For local machine
+    database='your_database_name'
+)
+```
+
+### Using GitHub Codespaces
+**Note:** Ensure you have a `.devcontainer` file set up correctly for your project in GitHub Codespaces.
+
+**1. Open the project in Codespaces:**
+   * Fork or clone the repository to your GitHub account.
+   * Open the project in Codespaces.
+
+**2. Follow the container environment setup steps above.**
+   * The `.devcontainer` file should handle the necessary Docker Compose setup.
+
+### Using Local Machine
+**1. Clone the repository:**
+   ```bash
+   git clone https://github.com/your_username/your_repo.git
+   ```
+**2. Follow the local machine setup steps above.**
 
