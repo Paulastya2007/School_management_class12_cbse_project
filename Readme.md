@@ -48,7 +48,7 @@
    ```
 
 ### Database Connection
-**Replace placeholders with your actual credentials:**
+**Replace placeholders with your actual credentials: in main.py**
 ```python
 import mysql.connector
 
@@ -73,7 +73,7 @@ db = mysql.connector.connect(
 ### Using Local Machine
 **1. Clone the repository:**
    ```bash
-   git clone https://github.com/your_username/your_repo.git
+   gh repo clone Paulastya2007/School_management_class12_cbse_project
    ```
 **2. Follow the local machine setup steps above.**
 
