@@ -1,4 +1,5 @@
 import mysql.connector
+import pandas as pd
 
 def fee_management(db):
     """Display the fee management menu and handle user input."""
@@ -43,28 +44,27 @@ def insert_fee(db):
         cursor.close()
 
 def display_all_fees(db):
-    """Display all fee records in the database."""
+    """Display all fee records in the database using Pandas."""
     try:
         cursor = db.cursor()
         sql = "SELECT * FROM fee"
         cursor.execute(sql)
         results = cursor.fetchall()
-        
+
         if results:
-            print("\nAll Fee Details:")
-            for row in results:
-                print(f"Admission No: {row[0]}, Fee: {row[1]}, Month: {row[2]}")
+            df = pd.DataFrame(results, columns=['Admission No', 'Fee', 'Month'])
+            print(df)
         else:
             print("No fee records found.")
-        
-        input("\nPress any key to continue...")  # Pause after displaying the details
+
+        input("\nPress any key to continue...")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
     finally:
         cursor.close()
 
 def display_fee_by_admno(db):
-    """Display fee details by admission number."""
+    """Display fee details by admission number using Pandas."""
     admno = int(input("Enter Admission Number: "))
 
     try:
@@ -72,14 +72,14 @@ def display_fee_by_admno(db):
         sql = "SELECT * FROM fee WHERE admno = %s"
         cursor.execute(sql, (admno,))
         result = cursor.fetchone()
-        
+
         if result:
-            print(f"\nFee Details for Admission No {admno}:")
-            print(f"Admission No: {result[0]}, Fee: {result[1]}, Month: {result[2]}")
+            df = pd.DataFrame([result], columns=['Admission No', 'Fee', 'Month'])
+            print(df)
         else:
             print("No fee record found for this admission number.")
-        
-        input("\nPress any key to continue...")  # Pause after displaying the details
+
+        input("\nPress any key to continue...")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
     finally:

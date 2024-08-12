@@ -1,4 +1,6 @@
 import mysql.connector
+import pandas as pd
+
 def student_management(db):
     """Display the student management menu and handle user input."""
     while True:
@@ -44,7 +46,7 @@ def insert_student(db):
         cursor.close()
 
 def display_all_students(db):
-    """Display all students in the database."""
+    """Display all students in the database using Pandas."""
     try:
         cursor = db.cursor()
         sql = "SELECT * FROM student"
@@ -52,20 +54,18 @@ def display_all_students(db):
         results = cursor.fetchall()
 
         if results:
-            print("\nAll Student Details:")
-            for row in results:
-                print(f"Name: {row[0]}, Admission No: {row[1]}, DOB: {row[2]}, Class: {row[3]}, City: {row[4]}")
+            df = pd.DataFrame(results, columns=['Name', 'Admission No', 'DOB', 'Class', 'City'])
+            print(df)
         else:
             print("No students found.")
 
-        input("\nPress any key to continue...")  # Pause after displaying the details
+        input("\nPress any key to continue...")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
     finally:
         cursor.close()
-
 def display_student_by_admno(db):
-    """Display details of a student by their admission number."""
+    """Display details of a student by their admission number using Pandas."""
     admno = int(input("Enter Admission Number: "))
 
     try:
@@ -75,12 +75,12 @@ def display_student_by_admno(db):
         result = cursor.fetchone()
 
         if result:
-            print(f"\nStudent Details for Admission No {admno}:")
-            print(f"Name: {result[0]}, Admission No: {result[1]}, DOB: {result[2]}, Class: {result[3]}, City: {result[4]}")
+            df = pd.DataFrame([result], columns=['Name', 'Admission No', 'DOB', 'Class', 'City'])
+            print(df)
         else:
             print("No student found with this admission number.")
 
-        input("\nPress any key to continue...")  # Pause after displaying the details
+        input("\nPress any key to continue...")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
     finally:
