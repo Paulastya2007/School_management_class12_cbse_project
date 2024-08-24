@@ -54,7 +54,7 @@ def display_all_employees(db):
         results = cursor.fetchall()
 
         if results:
-            df = pd.DataFrame(results, columns=['Name', 'Employee No', 'Job Title', 'Hire Date'])
+            df = pd.DataFrame(results, columns=['Employee No', 'Name', 'Job Title', 'Hire Date'])
             print(df)
         else:
             print("No employees found.")
@@ -76,7 +76,7 @@ def display_employee_by_empno(db):
         result = cursor.fetchone()
 
         if result:
-            df = pd.DataFrame([result], columns=['Name', 'Employee No', 'Job Title', 'Hire Date'])
+            df = pd.DataFrame([result], columns=['Employee No', 'Name', 'Job Title', 'Hire Date'])
             print(df)
         else:
             print("No employee found with this employee number.")
